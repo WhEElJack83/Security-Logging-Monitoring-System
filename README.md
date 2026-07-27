@@ -150,11 +150,22 @@ sudo systemctl status filebeat
 
 ## 4. Install Logstash
 
-Configure Logstash to:
-
-- Receive logs from Filebeat
-- Parse logs using Grok filters
-- Forward parsed events to Elasticsearch
+Logstash is responsible for receiving logs from Filebeat, processing them, and forwarding them to Elasticsearch.
+Install Logstash
+```bash
+sudo apt install -y logstash
+```
+> **Note:** Ensure the Elastic package repository has already been added during the Filebeat installation. Since this project uses the Elastic Stack **7.x**, all Elastic components (Filebeat, Logstash, Elasticsearch, and Kibana) should use the same major version for compatibility.
+Verify Installation
+```bash
+logstash --version
+```
+Expected output:
+```text
+logstash 7.x.x
+```
+Next Step
+Proceed to the Logstash pipeline configuration available in [`configs/logstash.conf`](configs/logstash.conf).
 
 
 ## 5. Install Elasticsearch
