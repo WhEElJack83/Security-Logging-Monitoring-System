@@ -140,12 +140,12 @@ Next Step
 Proceed to the Filebeat configuration available in [`configs/filebeat.yml`](configs/filebeat.yml).
 Start service
 ```bash
-sudo systemctl enable nginx
-sudo systemctl start nginx
+sudo systemctl enable filebeat
+sudo systemctl start filebeat
 ```
 Verify status
 ```bash
-sudo systemctl status nginx
+sudo systemctl status filebeat
 ```
 
 ## 4. Install Logstash
