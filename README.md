@@ -44,7 +44,6 @@ This project was originally developed as an academic project.
 | OWASP CRS | Attack Detection Rules |
 | Filebeat | Log Collection |
 | Logstash | Log Parsing |
-| Grok | Structured Log Extraction |
 | Elasticsearch | Log Storage & Search |
 | Kibana | Dashboards & Visualization |
 | ElastAlert | Alert Generation |
