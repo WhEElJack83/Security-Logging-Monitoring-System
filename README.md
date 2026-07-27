@@ -76,6 +76,22 @@ This project was originally developed as an academic project.
 
 Configure NGINX as the web server.
 
+```bash
+sudo apt install nginx -y
+```
+Verify installation
+```bash
+nginx -v
+```
+Start service
+```bash
+sudo systemctl enable nginx
+sudo systemctl start nginx
+```
+Verify status
+```bash
+sudo systemctl status nginx
+```
 
 ## 2. Install ModSecurity
 
