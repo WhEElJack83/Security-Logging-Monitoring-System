@@ -95,17 +95,58 @@ sudo systemctl status nginx
 
 ## 2. Install ModSecurity
 
-Install ModSecurity and enable the OWASP Core Rule Set (CRS).
+Install ModSecurity and the OWASP Core Rule Set (CRS).
+```bash
+sudo apt install -y libnginx-mod-http-modsecurity git
 
+sudo git clone https://github.com/coreruleset/coreruleset /etc/modsecurity/crs
+```
+Verify installation:
+```bash
+dpkg -l | grep modsecurity
+```
+> Continue with the ModSecurity configuration in [`configs/modsecurity.conf`](configs/modsecurity.conf).
 
 ## 3. Install Filebeat
 
-Configure Filebeat to collect:
-
-- NGINX Access Logs
-- NGINX Error Logs
-- ModSecurity Audit Logs
-
+Filebeat is used to collect log files from the web server and forward them to Logstash for further processing.
+Add the Elastic GPG Key
+```bash
+curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+```
+Add the Elastic Package Repository
+```bash
+echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | \
+sudo tee /etc/apt/sources.list.d/elastic-7.x.list
+```
+> **Note:** This project was developed using Elastic Stack **7.x**. If you are using a different version, update the repository URL accordingly.
+Update Package Index
+```bash
+sudo apt update
+```
+Install Filebeat
+```bash
+sudo apt install -y filebeat
+```
+Verify Installation
+```bash
+filebeat version
+```
+Expected output:
+```text
+filebeat version 7.x.x
+```
+Next Step
+Proceed to the Filebeat configuration available in [`configs/filebeat.yml`](configs/filebeat.yml).
+Start service
+```bash
+sudo systemctl enable nginx
+sudo systemctl start nginx
+```
+Verify status
+```bash
+sudo systemctl status nginx
+```
 
 ## 4. Install Logstash
 
