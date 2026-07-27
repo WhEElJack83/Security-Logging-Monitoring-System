@@ -170,18 +170,102 @@ Proceed to the Logstash pipeline configuration available in [`configs/logstash.c
 
 ## 5. Install Elasticsearch
 
-Configure Elasticsearch for indexing and searching security events.
-
+Elasticsearch is the core search and analytics engine used to store, index, and retrieve logs collected from the ELK Stack.
+Install Elasticsearch
+```bash
+sudo apt install -y elasticsearch
+```
+> **Note:** This project uses **Elasticsearch 7.x**. For compatibility, ensure that Filebeat, Logstash, Elasticsearch, and Kibana are all running the same major version.
+Verify Installation
+```bash
+elasticsearch --version
+```
+Alternatively, after starting the service, verify that Elasticsearch is running:
+```bash
+curl http://localhost:9200
+```
+Expected output:
+```json
+{
+  "name" : "hostname",
+  "cluster_name" : "elasticsearch",
+  "version" : {
+    "number" : "7.x.x"
+  }
+}
+```
+Next Step
+Proceed to the Elasticsearch configuration available in [`configs/elasticsearch.yml`](configs/elasticsearch.yml).
 
 ## 6. Install Kibana
 
-Connect Kibana to Elasticsearch and create index patterns.
+Kibana is the visualization layer of the Elastic Stack, providing dashboards and search capabilities for the logs stored in Elasticsearch.
+Install Kibana
+```bash
+sudo apt install -y kibana
+```
+> **Note:** This project uses **Kibana 7.x**. Ensure that Kibana and Elasticsearch are running the same major version to avoid compatibility issues.
+Verify Installation
+```bash
+kibana --version
+```
+Expected output:
+```text
+kibana 7.x.x
+```
+Start Kibana Service
+```bash
+sudo systemctl enable kibana
+sudo systemctl start kibana
+```
+Verify the service status:
+```bash
+sudo systemctl status kibana
+```
+Access Kibana
+Once the service is running, open your web browser and navigate to:
+```text
+http://localhost:5601
+```
+> Replace `localhost` with your server's IP address if Kibana is running on a remote machine.
+Next Step
+Proceed to the Kibana configuration available in [`configs/kibana.yml`](configs/kibana.yml).
 
+## 7. Install ElastAlert
 
-## 7. Configure ElastAlert
-
-Create alert rules for suspicious events and configure email notifications.
-
+ElastAlert is used to continuously monitor Elasticsearch indices and generate alerts when predefined conditions are met.
+Install Python and pip
+```bash
+sudo apt update
+sudo apt install -y python3 python3-pip python3-venv
+```
+Clone the ElastAlert Repository
+```bash
+git clone https://github.com/jertel/elastalert2.git
+cd elastalert2
+```
+Create a Python Virtual Environment
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+Install ElastAlert
+```bash
+pip install --upgrade pip
+pip install -r requirements.txt
+pip install .
+```
+> **Note:** This project uses **ElastAlert 2**, which is compatible with Elasticsearch 7.x and later. Refer to the official ElastAlert documentation if using a different Elastic Stack version.
+Verify Installation
+```bash
+elastalert --version
+```
+Expected output:
+```text
+elastalert 2.x.x
+```
+Next Step
+Proceed to the ElastAlert configuration available in [`configs/elastalert.yaml`](configs/elastalert.yaml).
 ---
 
 # Configuration Guide
