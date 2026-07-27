@@ -53,6 +53,25 @@ This project was originally developed as an academic project.
 
 # Installation Guide
 
+> **Note**
+>
+> This project was implemented and tested using the following software versions. Newer versions may require minor configuration changes due to updates in package structures, configuration syntax, or compatibility between ELK Stack components.
+
+| Component | Version |
+|----------|---------|
+| NGINX | 1.x.x |
+| ModSecurity | v3.x |
+| OWASP CRS | 4.x |
+| Elasticsearch | 7.x |
+| Logstash | 7.x |
+| Kibana | 7.x |
+| Filebeat | 7.x |
+| ElastAlert | 2.x |
+
+> **Compatibility Note**
+>
+> The Elastic Stack components (Elasticsearch, Logstash, Kibana, and Filebeat) should ideally use the **same major version** to avoid compatibility issues.
+
 ## 1. Install NGINX
 
 Configure NGINX as the web server.
